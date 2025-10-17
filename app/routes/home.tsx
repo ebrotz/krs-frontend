@@ -3,6 +3,7 @@ import type { Route } from "./+types/home";
 import Box from '@mui/material/Box'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
+import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 
 export function meta({}: Route.MetaArgs) {
@@ -24,9 +25,11 @@ function SearchableCardPlane() {
   return (
     <div>
       <input type="text" placeholder="Search..." />
-      <Box>
-        <PlaceCard title="Place one" address="1111 1st St" />
-        <PlaceCard title="Place two" address="2222 2nd St" />
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+            <PlaceCard title="Place one" address="1111 1st St" />
+            <PlaceCard title="Place two" address="2222 2nd St" />
+        </Grid>
       </Box>
     </div>
   );
