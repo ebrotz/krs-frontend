@@ -5,6 +5,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
+import ButtonAppBar from './appbar';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -16,15 +17,15 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <div>
-      <SearchableCardPlane />
+      <ButtonAppBar />
+      <CardPlane />
     </div>
   )
 }
 
-function SearchableCardPlane() {
+function CardPlane() {
   return (
     <div>
-      <input type="text" placeholder="Search..." />
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
             <PlaceCard title="Place one" address="1111 1st St" />
