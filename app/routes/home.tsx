@@ -7,6 +7,7 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import ButtonAppBar from './appbar';
 import Container from '@mui/material/Container';
+import { CardActions } from '@mui/material';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -30,7 +31,12 @@ export default function Home() {
   )
 }
 
-const places = [
+interface Place {
+  title: string
+  address: string
+}
+
+const places: Place[] = [
   { title: "Place One", address: "123 Main St, Cityville" },
   { title: "Place Two", address: "456 Oak Ave, Townsville" },
   { title: "Place Three", address: "789 Pine Rd, Villageburg" },
@@ -45,6 +51,7 @@ const places = [
 
 // See breakpoints at https://m2.material.io/design/layout/responsive-layout-grid.html#breakpoints 
 const responsiveGridColumns = {xs: 4, sm: 8, md: 12}
+const responsiveGridMargin = {xs: 16, sm: 32, md: 200, lg: 'scaling'}
 
 function CardPlane() {
   return (
@@ -52,15 +59,23 @@ function CardPlane() {
       {
         places.map((place, idx) => (
           <Grid key={idx} size={{ xs: 2, sm: 4, md: 4 }}>
-            <Card variant="outlined" sx={{ minWidth: 275 }}>
-              <CardContent>
-                <Typography variant="h5" sx={{ color: 'text.primary' }}>{place.title}</Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary'}}>{place.address}</Typography>
-              </CardContent>
-            </Card>
+            <PlaceCard {...place} />
           </Grid>
         ))
       }
     </Grid>
+  );
+}
+
+function PlaceCard(p: Place) {
+  return (
+    <Card variant="outlined" sx={{ minWidth: 275 }}>
+      <CardContent>
+        <Typography variant="h5" sx={{ color: 'text.primary' }}>{p.title}</Typography>
+        <Typography variant="body2" sx={{ color: 'text.secondary'}}>{p.address}</Typography>
+      </CardContent>
+      <CardActions>
+      </CardActions>
+    </Card>
   );
 }
