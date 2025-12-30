@@ -6,6 +6,7 @@ import CardContent from '@mui/material/CardContent'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import ButtonAppBar from './appbar';
+import Container from '@mui/material/Container';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -18,38 +19,45 @@ export default function Home() {
   return (
     <div>
       <ButtonAppBar />
-      <CardPlane />
+      <Container
+        maxWidth="lg"
+        component="main"
+        sx={{ display: 'flex', flexDirection: 'column', my: '1em', gap: 4 }}
+      >
+        <CardPlane />
+      </Container>
     </div>
   )
 }
 
+const places = [
+  { title: "Place One", address: "123 Main St, Cityville" },
+  { title: "Place Two", address: "456 Oak Ave, Townsville" },
+  { title: "Place Three", address: "789 Pine Rd, Villageburg" },
+  { title: "Place Four", address: "789 Pine Rd, Villageburg" },
+  { title: "Place Five", address: "789 Pine Rd, Villageburg" },
+  { title: "Place Six", address: "789 Pine Rd, Villageburg" },
+  { title: "Place Seven", address: "789 Pine Rd, Villageburg" },
+  { title: "Place Eight", address: "789 Pine Rd, Villageburg" },
+  { title: "Place Nine", address: "789 Pine Rd, Villageburg" },
+  { title: "Place Ten", address: "789 Pine Rd, Villageburg" }
+]
+
 function CardPlane() {
   return (
-    <div>
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-            <PlaceCard title="Place one" address="1111 1st St" />
-            <PlaceCard title="Place two" address="2222 2nd St" />
-        </Grid>
-      </Box>
-    </div>
-  );
-}
-
-interface PlaceSummary {
-  title: string;
-  address: string;
-}
-
-function PlaceCard(s: PlaceSummary) {
-  return (
-    <Card variant="outlined" sx={{ maxWidth: 345 }}>
-      <React.Fragment>
-        <CardContent>
-          <Typography variant="h5">{s.title}</Typography>
-          <Typography variant="body2">{s.address}</Typography>
-        </CardContent>
-      </React.Fragment>
-    </Card>
+    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+      {
+        places.map((place, idx) => (
+          <Grid key={idx} size={{ xs: 2, sm: 4, md: 4 }}>
+            <Card variant="outlined" sx={{ minWidth: 275 }}>
+              <CardContent>
+                <Typography variant="h5" sx={{ color: 'text.primary' }}>{place.title}</Typography>
+                <Typography variant="body2" sx={{ color: 'text.secondary'}}>{place.address}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))
+      }
+    </Grid>
   );
 }
