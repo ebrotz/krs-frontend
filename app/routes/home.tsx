@@ -43,9 +43,12 @@ const places = [
   { title: "Place Ten", address: "789 Pine Rd, Villageburg" }
 ]
 
+// See breakpoints at https://m2.material.io/design/layout/responsive-layout-grid.html#breakpoints 
+const responsiveGridColumns = {xs: 4, sm: 8, md: 12}
+
 function CardPlane() {
   return (
-    <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+    <Grid container spacing={{ xs: 2, md: 3 }} columns={responsiveGridColumns}>
       {
         places.map((place, idx) => (
           <Grid key={idx} size={{ xs: 2, sm: 4, md: 4 }}>
