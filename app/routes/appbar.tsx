@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import * as AccountButton from '~/components/AccountButton'
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -80,17 +80,7 @@ export default function ButtonAppBar() {
           <Box sx={{ flexGrow: 1 }} />
           {/* Expansion for items in the upper right */}
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={undefined}
-              aria-haspopup="true"
-              onClick={undefined}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            <AccountButton.Button />
           </Box>
         </Toolbar>
       </AppBar>
