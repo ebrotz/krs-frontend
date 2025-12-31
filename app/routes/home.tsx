@@ -8,10 +8,8 @@ import Typography from '@mui/material/Typography'
 import ButtonAppBar from './appbar';
 import Container from '@mui/material/Container';
 import { CardActions, CardHeader, IconButton, Menu } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import MenuItem from '@mui/material/MenuItem';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AdminMenu from '~/components/AdminMenu';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -71,9 +69,6 @@ function CardPlane() {
 }
 
 function PlaceCard(p: Place) {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
   return (
     <Card variant="outlined" sx={{ minWidth: 275 }}>
       {/** TODO Add CardMedia, if available. Would be something like a banner picture. */}
@@ -93,30 +88,5 @@ function PlaceCard(p: Place) {
         </IconButton>
       </CardActions>
     </Card>
-  );
-}
-
-// AdminMenu returns the element corresponding to the
-// administrator menu in the card header.
-function AdminMenu(): React.ReactElement {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  return (
-      <div>
-        <IconButton onClick={handleClick}>
-          <AdminPanelSettingsIcon/>
-        </IconButton>
-        <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
-          <MenuItem onClick={handleClose}>Update</MenuItem>
-          <MenuItem onClick={handleClose}>Delete</MenuItem>
-        </Menu>
-      </div>
   );
 }
