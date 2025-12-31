@@ -7,7 +7,11 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import ButtonAppBar from './appbar';
 import Container from '@mui/material/Container';
-import { CardActions } from '@mui/material';
+import { CardActions, CardHeader, IconButton, Menu } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import MenuItem from '@mui/material/MenuItem';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -51,7 +55,6 @@ const places: Place[] = [
 
 // See breakpoints at https://m2.material.io/design/layout/responsive-layout-grid.html#breakpoints 
 const responsiveGridColumns = {xs: 4, sm: 8, md: 12}
-const responsiveGridMargin = {xs: 16, sm: 32, md: 200, lg: 'scaling'}
 
 function CardPlane() {
   return (
@@ -68,14 +71,52 @@ function CardPlane() {
 }
 
 function PlaceCard(p: Place) {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
   return (
     <Card variant="outlined" sx={{ minWidth: 275 }}>
+      {/** TODO Add CardMedia, if available. Would be something like a banner picture. */}
+      {/** Admin menu should only be visible if the user actually has admin */}
+      <CardHeader action={
+        <AdminMenu/>
+      }>
+      </CardHeader>
       <CardContent>
         <Typography variant="h5" sx={{ color: 'text.primary' }}>{p.title}</Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary'}}>{p.address}</Typography>
       </CardContent>
       <CardActions>
+        <IconButton>
+          {/* TODO Should be dynamic depending on if the place is in the user's favorites */}
+          <FavoriteBorderIcon />
+        </IconButton>
       </CardActions>
     </Card>
+  );
+}
+
+// AdminMenu returns the element corresponding to the
+// administrator menu in the card header.
+function AdminMenu(): React.ReactElement {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+      <div>
+        <IconButton onClick={handleClick}>
+          <AdminPanelSettingsIcon/>
+        </IconButton>
+        <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
+          <MenuItem onClick={handleClose}>Update</MenuItem>
+          <MenuItem onClick={handleClose}>Delete</MenuItem>
+        </Menu>
+      </div>
   );
 }
