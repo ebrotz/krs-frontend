@@ -1,9 +1,9 @@
 import type { Route } from "./+types/home";
-import Grid from '@mui/material/Grid'
 import ButtonAppBar from './appbar';
 import Container from '@mui/material/Container';
-import PlaceCard from '~/components/PlaceCard'
 import * as Place from '~/common/Place'
+import CardGrid from "~/components/CardGrid";
+
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,7 +21,7 @@ export default function Home() {
         component="main"
         sx={{ display: 'flex', flexDirection: 'column', my: '1em', gap: 4 }}
       >
-        <CardPlane />
+        <CardGrid p={places} />
       </Container>
     </div>
   )
@@ -39,20 +39,3 @@ const places: Place.Place[] = [
   { title: "Place Nine", address: "789 Pine Rd, Villageburg" },
   { title: "Place Ten", address: "789 Pine Rd, Villageburg" }
 ]
-
-// See breakpoints at https://m2.material.io/design/layout/responsive-layout-grid.html#breakpoints 
-const responsiveGridColumns = {xs: 4, sm: 8, md: 12}
-
-function CardPlane() {
-  return (
-    <Grid container spacing={{ xs: 2, md: 3 }} columns={responsiveGridColumns}>
-      {
-        places.map((place, idx) => (
-          <Grid key={idx} size={{ xs: 2, sm: 4, md: 4 }}>
-            <PlaceCard {...place} />
-          </Grid>
-        ))
-      }
-    </Grid>
-  );
-}
