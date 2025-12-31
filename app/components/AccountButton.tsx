@@ -27,20 +27,22 @@ export function Button() {
     }
 
     return (
-        <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={undefined}
-            aria-haspopup="true"
-            onClick={onClickHandler}
-            color="inherit"
-            >
-            <AccountCircle />
-            <Menu id="account-menu" open={open} onClose={closeHandler}>
+        <div>
+            <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={undefined}
+                aria-haspopup="true"
+                onClick={onClickHandler}
+                color="inherit"
+                >
+                <AccountCircle />
+            </IconButton>
+            <Menu anchorEl={anchorEl} open={open} onClose={closeHandler}>
                 <MenuItem onClick={myAccountHandler}>My Account</MenuItem>
                 <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </Menu>
-        </IconButton>
+        </div>
     );
 }
