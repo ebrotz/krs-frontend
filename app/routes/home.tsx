@@ -3,6 +3,8 @@ import ButtonAppBar from './appbar';
 import Container from '@mui/material/Container';
 import * as Place from '~/common/Place'
 import CardGrid from "~/components/CardGrid";
+import axios from 'axios'
+import * as react from 'react'
 
 
 export function meta({}: Route.MetaArgs) {
@@ -13,6 +15,18 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const [places, setPlaces] = react.useState<Place.Place[]>([])
+
+  // The browser is launching this request.
+  axios.get('http://localhost:8080/places')
+    .then((response) => {
+      let d: Place.Place[] = response.data
+      setPlaces(d)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+
   return (
     <div>
       <ButtonAppBar />
@@ -28,14 +42,14 @@ export default function Home() {
 }
 
 const places: Place.Place[] = [
-  { title: "Place One", address: "123 Main St, Cityville" },
-  { title: "Place Two", address: "456 Oak Ave, Townsville" },
-  { title: "Place Three", address: "789 Pine Rd, Villageburg" },
-  { title: "Place Four", address: "789 Pine Rd, Villageburg" },
-  { title: "Place Five", address: "789 Pine Rd, Villageburg" },
-  { title: "Place Six", address: "789 Pine Rd, Villageburg" },
-  { title: "Place Seven", address: "789 Pine Rd, Villageburg" },
-  { title: "Place Eight", address: "789 Pine Rd, Villageburg" },
-  { title: "Place Nine", address: "789 Pine Rd, Villageburg" },
-  { title: "Place Ten", address: "789 Pine Rd, Villageburg" }
+  { name: "Place One", description: "", phone: "", website: ""},
+  { name: "Place Two", description: "", phone: "", website: "" },
+  { name: "Place Three", description: "", phone: "", website: "" },
+  { name: "Place Four", description: "", phone: "", website: "" },
+  { name: "Place Five", description: "", phone: "", website: "" },
+  { name: "Place Six", description: "", phone: "", website: "" },
+  { name: "Place Seven", description: "", phone: "", website: "" },
+  { name: "Place Eight", description: "", phone: "", website: "" },
+  { name: "Place Nine", description: "", phone: "", website: "" },
+  { name: "Place Ten", description: "", phone: "", website: "" }
 ]

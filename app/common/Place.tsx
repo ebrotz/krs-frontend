@@ -1,4 +1,6 @@
 export interface Place {
-  title: string
-  address: string
+  description: string
+  name: string
+  phone: string
+  website: string
 }
