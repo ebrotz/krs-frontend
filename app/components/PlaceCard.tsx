@@ -16,8 +16,8 @@ export default function PlaceCard(p: Place.Place) {
       }>
       </CardHeader>
       <CardContent>
-        <Typography variant="h5" sx={{ color: 'text.primary' }}>{p.title}</Typography>
-        <Typography variant="body2" sx={{ color: 'text.secondary'}}>{p.address}</Typography>
+        <Typography variant="h5" sx={{ color: 'text.primary' }}>{p.name}</Typography>
+        <Typography variant="body2" sx={{ color: 'text.secondary'}}>{p.description}</Typography>
       </CardContent>
       <CardActions>
         <IconButton>
